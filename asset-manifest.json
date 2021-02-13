@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/CalgaryHacks_DiscoDreams/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/CalgaryHacks_DiscoDreams/static/js/main.2ef3812b.chunk.js",
+    "main.js.map": "/CalgaryHacks_DiscoDreams/static/js/main.2ef3812b.chunk.js.map",
+    "runtime-main.js": "/CalgaryHacks_DiscoDreams/static/js/runtime-main.ade3b3eb.js",
+    "runtime-main.js.map": "/CalgaryHacks_DiscoDreams/static/js/runtime-main.ade3b3eb.js.map",
+    "static/js/2.e29d0462.chunk.js": "/CalgaryHacks_DiscoDreams/static/js/2.e29d0462.chunk.js",
+    "static/js/2.e29d0462.chunk.js.map": "/CalgaryHacks_DiscoDreams/static/js/2.e29d0462.chunk.js.map",
+    "static/js/3.65d61b4b.chunk.js": "/CalgaryHacks_DiscoDreams/static/js/3.65d61b4b.chunk.js",
+    "static/js/3.65d61b4b.chunk.js.map": "/CalgaryHacks_DiscoDreams/static/js/3.65d61b4b.chunk.js.map",
+    "index.html": "/CalgaryHacks_DiscoDreams/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/CalgaryHacks_DiscoDreams/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.e29d0462.chunk.js.LICENSE.txt": "/CalgaryHacks_DiscoDreams/static/js/2.e29d0462.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/CalgaryHacks_DiscoDreams/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ade3b3eb.js",
+    "static/js/2.e29d0462.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.2ef3812b.chunk.js"
+  ]
+}
