@@ -22,5 +22,3 @@ URGENT TODOS:
 - Back end: 
   - Set up classes to calculate meter metrics to pass to the front end.
   - Look into firebase to implement log in functionaltiy
-
-Hello
