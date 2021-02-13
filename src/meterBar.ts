@@ -1,3 +1,28 @@
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+var firebase = require("firebase/app");
+
+// Add the Firebase products that you want to use
+require("firebase/auth");
+require("firebase/firestore");
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+    apiKey: "AIzaSyBR7BEXnWTScVSoJ5jzoFPfZuqb0tiZkx8",
+    authDomain: "friendshipmeter.firebaseapp.com",
+    projectId: "friendshipmeter",
+    storageBucket: "friendshipmeter.appspot.com",
+    messagingSenderId: "719040243429",
+    appId: "1:719040243429:web:4b5b111f1f7a07afca960c",
+    measurementId: "G-XVTEWPHJYL"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 export class meterBar {
 
     private point: number;
