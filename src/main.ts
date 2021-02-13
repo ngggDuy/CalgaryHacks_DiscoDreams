@@ -2,7 +2,7 @@ class meterBar {
 
     private point: number;
     private CHANGE_AMOUNT: number = 5;
-
+// bhbbh
     constructor() {
         this.point = 50;
     }
