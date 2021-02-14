@@ -41,9 +41,9 @@ class IsolationBar extends Component {
         }
     }
 
-    onSaveClick= (props) => {
+    onSaveClick= () => {
         window.alert("Saved!");
-        saveUserData(props.user);
+        saveUserData(this.props.user);
     }
 
     render() {
