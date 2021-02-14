@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
-
 class IsolationBar extends Component {
 
     constructor(props) {
