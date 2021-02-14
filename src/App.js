@@ -24,14 +24,15 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 let myUser = new User("aaa", "asdf", ["r"],[55],["z"]); // stub user
 
-export function saveUserData(user) {
+export function saveUserData(user, name = null, id = null, friendsList = null,
+                             responses = null, scores = null) {
     let path = "users/" + user.getId();
     let docRef = firestore.doc(path);
     docRef.set({
-        id: user.getId(),
-        friendsList: user.getFriendsList(),
-        responses: user.getResponses(),
-        scores: user.getMetrics(),
+        id: id === null? user.getId() : id,
+        friendsList: friendsList === null? user.getFriendsList() : friendsList,
+        responses: responses === null? user.getResponses() : responses,
+        scores: scores === null? user.getMetrics() : scores,
     }).then( function() {
         console.log("success, glorious!");
     }).catch( function(error) {
