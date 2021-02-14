@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import IsolationBar from "../../CalgaryHacks_DiscoDreams/src/components/IsolationBar";
-import FriendsBar from "../../CalgaryHacks_DiscoDreams/src/components/FriendsBar";
+
 import {User} from "./moodAppClasses"
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -9,16 +8,22 @@ import 'firebase/auth';
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import IsolationBar from "./components/IsolationBar";
+import FriendsBar from "./components/FriendsBar";
 
-firebase.initializeApp({
-    apiKey: "AIzaSyBR7BEXnWTScVSoJ5jzoFPfZuqb0tiZkx8",
-    authDomain: "friendshipmeter.firebaseapp.com",
-    projectId: "friendshipmeter",
-    storageBucket: "friendshipmeter.appspot.com",
-    messagingSenderId: "719040243429",
-    appId: "1:719040243429:web:4b5b111f1f7a07afca960c",
-    measurementId: "G-XVTEWPHJYL"
-})
+if (!firebase.apps.length) {
+    firebase.initializeApp({
+        apiKey: "AIzaSyBR7BEXnWTScVSoJ5jzoFPfZuqb0tiZkx8",
+        authDomain: "friendshipmeter.firebaseapp.com",
+        projectId: "friendshipmeter",
+        storageBucket: "friendshipmeter.appspot.com",
+        messagingSenderId: "719040243429",
+        appId: "1:719040243429:web:4b5b111f1f7a07afca960c",
+        measurementId: "G-XVTEWPHJYL"
+    });
+}else {
+    firebase.app(); // if already initialized, use that one
+}
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
