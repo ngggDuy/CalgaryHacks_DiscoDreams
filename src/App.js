@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import IsolationBar from "../../CalgaryHacks_DiscoDreams/src/components/IsolationBar";
 import FriendsBar from "../../CalgaryHacks_DiscoDreams/src/components/FriendsBar";
@@ -9,6 +9,7 @@ import 'firebase/auth';
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+
 
 firebase.initializeApp({
     apiKey: "AIzaSyBR7BEXnWTScVSoJ5jzoFPfZuqb0tiZkx8",
@@ -22,33 +23,44 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-let myUser = new User("aaa", "asdf", ["r"],[55],["z"]); // stub user
+let myUser = new User("temp", "temp@hotmail.com", [""],[0],[""]); // stub user
 
-export function saveUserData(user, name = null, id = null, friendsList = null,
+export function saveUserData(user, name = null, email = null, friendsList = null,
                              responses = null, scores = null) {
-    let path = "users/" + user.getId();
+
+    let path = "users/" + user.getEmail();
     let docRef = firestore.doc(path);
     docRef.set({
-        id: id === null? user.getId() : id,
+        email: email === null? user.getEmail() : email,
+        name: name === null? user.getName() : name,
         friendsList: friendsList === null? user.getFriendsList() : friendsList,
         responses: responses === null? user.getResponses() : responses,
         scores: scores === null? user.getMetrics() : scores,
     }).then( function() {
         console.log("success, glorious!");
     }).catch( function(error) {
-        console.log("error");
+        console.log(error);
     });
 }
+
+// https://stackoverflow.com/questions/46240647/react-how-to-force-a-function-component-to-render
+// function to force the react function component to rerender
+function useForceUpdate(){
+    const [value, setValue] = useState(0); // integer state
+    return () => setValue(value => value + 1); // update the state to force render
+}
+
+
 
 function makeUser(user, token) {
     console.log("starting to make user");
     let path = "users/" + user.uid;
-    console.log(path);
     let docRef = firestore.doc(path);
     let name, id, friendsList, metrics, responses;
 
     name = user.displayName;
     id = user.uid;
+
     docRef.get().then(function (doc) {
         if (doc && doc.exists) {
             console.log("this is True for new users");
@@ -59,15 +71,18 @@ function makeUser(user, token) {
         } else {
             console.log("this is False for new users");
             friendsList = [""];
-            metrics = [50];
+            metrics = [33];
             responses = [""];
         }
+
+        console.log("finished parsing Fields");
+        myUser = new User(name, id, friendsList, metrics, responses);
+        console.log("finished making User");
+        console.log(myUser.getId());
+
     }).catch( function(error) {
-        console.log("error");
+        console.log(error);
     });
-    let newUser = new User(name, id, friendsList, metrics, responses);
-    saveUserData(newUser);
-    return newUser;
 }
 
 function App() {
@@ -98,8 +113,13 @@ function SignIn() {
             // The signed-in user info.
             let user = result.user;
             //
-            // myUser = makeUser(user,token);
-            console.log(myUser.getId());
+            // makeUser(user,token);
+
+        }).then(() => {
+            saveUserData(myUser);
+        }).then(() => {
+            // useForceUpdate();
+            console.log("forcing update");
         }).catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
