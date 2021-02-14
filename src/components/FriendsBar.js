@@ -35,7 +35,7 @@ class FriendsBar extends Component {
             }]
         }
     }
-
+// new
     categories() {
         let array = [];
         for(let i = 0, len = this.props.user.friendsList.length; i < len; i++) {

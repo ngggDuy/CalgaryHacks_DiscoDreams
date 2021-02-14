@@ -70,7 +70,7 @@ function makeUser(user, token) {
     saveUserData(newUser);
     return newUser;
 }
-
+// comment
 function App() {
     const [user] = useAuthState(auth);
     //this.user
