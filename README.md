@@ -1,4 +1,4 @@
-# CalgaryHacks_DiscoDreams
+## Mood-meter
 
 - Code name friendship meter: measures how isolated you are feeling. The more isolated you are, the lower the meter gets. Once your meter drops below a certain value, an alert is sent to all people on your friends list so they can come check on you.
 
