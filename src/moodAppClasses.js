@@ -1,14 +1,14 @@
 export class User {
 
     name;
-    id; // this should be the auth's uid
+    email; // this should be the auth's uid
     friendsList;
     metrics;
     responses;
 
-    constructor(name, id, friendsList, metrics, responses) {
+    constructor(name, email, friendsList, metrics, responses) {
         this.name = name;
-        this.id = id;
+        this.email = email;
         this.friendsList = friendsList;
         this.metrics = metrics;
         this.responses = responses;
@@ -18,8 +18,8 @@ export class User {
         return this.name;
     }
 
-    getId()  {
-        return this.id;
+    getEmail()  {
+        return this.email;
     }
 
     getFriendsList() {
@@ -34,8 +34,8 @@ export class User {
         return this.responses;
     }
 
-    setId(newId) {
-        this.id = newId;
+    setEmail(newEmail) {
+        this.email = newEmail;
     }
 
     setFriendsList(newFriendsList) {

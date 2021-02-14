@@ -22,21 +22,22 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-let myUser = new User("aaa", "asdf", ["r"],[55],["z"]); // stub user
+let myUser = new User("temp", "temp@hotmail.com", ["asdf"],[60, 30],[""]); // stub user
 
-export function saveUserData(user, name = null, id = null, friendsList = null,
+export function saveUserData(user, name = null, email = null, friendsList = null,
                              responses = null, scores = null) {
-    let path = "users/" + user.getId();
+    let path = "users/" + user.getEmail();
     let docRef = firestore.doc(path);
     docRef.set({
-        id: id === null? user.getId() : id,
+        email: email === null? user.getEmail() : email,
+        name: name === null? user.getName() : name,
         friendsList: friendsList === null? user.getFriendsList() : friendsList,
         responses: responses === null? user.getResponses() : responses,
         scores: scores === null? user.getMetrics() : scores,
     }).then( function() {
         console.log("success, glorious!");
     }).catch( function(error) {
-        console.log("error");
+        console.log(error);
     });
 }
 
@@ -63,7 +64,7 @@ function makeUser(user, token) {
             responses = [""];
         }
     }).catch( function(error) {
-        console.log("error");
+        console.log(error);
     });
     let newUser = new User(name, id, friendsList, metrics, responses);
     saveUserData(newUser);
@@ -127,7 +128,7 @@ function Interface() {
     return (
         <div className="container">
             <IsolationBar user = {myUser}/>
-            <FriendsBar user = {myUser}/>
+            <FriendsBar user = {myUser} fs = {firestore}/>
         </div>
     )
 }
