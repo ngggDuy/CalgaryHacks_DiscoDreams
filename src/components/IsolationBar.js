@@ -16,7 +16,7 @@ class IsolationBar extends Component {
                 },
                 labels: [':)']
             },
-            series: [50]
+            series: [props.user.metrics[props.user.metrics.length - 1]]
         }
     }
 

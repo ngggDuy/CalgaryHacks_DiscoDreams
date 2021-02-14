@@ -10,118 +10,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 firebase.initializeApp({
-  apiKey: "AIzaSyBR7BEXnWTScVSoJ5jzoFPfZuqb0tiZkx8",
-  authDomain: "friendshipmeter.firebaseapp.com",
-  projectId: "friendshipmeter",
-  storageBucket: "friendshipmeter.appspot.com",
-  messagingSenderId: "719040243429",
-  appId: "1:719040243429:web:4b5b111f1f7a07afca960c",
-  measurementId: "G-XVTEWPHJYL"
+    apiKey: "AIzaSyBR7BEXnWTScVSoJ5jzoFPfZuqb0tiZkx8",
+    authDomain: "friendshipmeter.firebaseapp.com",
+    projectId: "friendshipmeter",
+    storageBucket: "friendshipmeter.appspot.com",
+    messagingSenderId: "719040243429",
+    appId: "1:719040243429:web:4b5b111f1f7a07afca960c",
+    measurementId: "G-XVTEWPHJYL"
 })
-
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-let user = null;
-
-function App() {
-    const [user] = useAuthState(auth);
-
-    return (
-      <div className="container">
-          <header>
-              <SignOut/>
-          </header>
-
-          <section>
-              {user ? <Interface/> : <SignIn />}
-          </section>
-      </div>
-  );
-}
-
-function SignIn() {
-    const signInWithGoogle = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider).then((result) => {
-            /** @type {firebase.auth.OAuthCredential} */
-            let credential = result.credential;
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            let token = credential.accessToken;
-            // The signed-in user info.
-            let user = result.user;
-            //
-            this.user = makeUser(user,token);
-            console.log(this.user.getId());
-
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            const credential = error.credential;
-            // ...
-        });
-    }
-
-    return (
-        <button onClick={signInWithGoogle}>Sign in with Google</button>
-    )
-}
-
-function SignOut() {
-    return auth.currentUser && (
-        <button onClick={() => auth.signOut()}>Sign Out</button>
-    )
-}
-
-function Interface() {
-    return (
-        <div className="container">
-            <IsolationBar/>
-            <FriendsBar/>
-        </div>
-    )
-}
-
-function saveUserData(user) {
-    let path = "users/" + user.getId();
-    let docRef = firestore.doc(path);
-    docRef.set({
-        id: user.getId(),
-        friendsList: user.getFriendsList(),
-        responses: user.getResponses(),
-        scores: user.getMetrics(),
-    }).then( function() {
-        console.log("success, glorious!");
-    }).catch( function(error) {
-        console.log("error");
-    });
-}
-
-function makeUser(user, token) {
-    let path = "users/" + user.uid;
-    let docRef = firestore.doc(path);
-    let name, id, friendsList, metrics, responses;
-
-    name = user.displayName;
-    id = user.uid;
-    docRef.get().then(function (doc) {
-        if (doc && doc.exists) {
-            const userData = doc.data();
-            friendsList = userData.friendsList;
-            metrics = userData.scores;
-            responses = userData.responses;
-        } else {
-            friendsList = [];
-            metrics = [];
-            responses = [];
-        }
-    })
-    let newUser = new User(name, id, friendsList, metrics, responses);
-    return newUser;
-}
 
 class User {
 
@@ -174,6 +70,112 @@ class User {
     setResponses(newResponses) {
         this.responses = newResponses;
     }
+}
+
+const auth = firebase.auth();
+const firestore = firebase.firestore();
+let myUser = new User("aaa", "asdf", ["r"],[50],["z"]);
+
+function App() {
+    const [user] = useAuthState(auth);
+    //this.user
+    return (
+        <div className="container">
+            <header>
+                <SignOut/>
+            </header>
+
+            <section>
+                {user ? <Interface/> : <SignIn />}
+            </section>
+        </div>
+    );
+}
+
+function SignIn() {
+    const signInWithGoogle = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).then((result) => {
+            /** @type {firebase.auth.OAuthCredential} */
+            let credential = result.credential;
+
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            let token = credential.accessToken;
+            // The signed-in user info.
+            let user = result.user;
+            //
+            this.user = makeUser(user,token);
+            console.log(this.user.getId());
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            const credential = error.credential;
+            // ...
+        });
+    }
+
+    return (
+        <button onClick={signInWithGoogle}>Sign in with Google</button>
+    )
+}
+
+function SignOut() {
+    return auth.currentUser && (
+        <button onClick={() => auth.signOut()}>Sign Out</button>
+    )
+}
+
+function Interface() {
+    return (
+        <div className="container">
+            <IsolationBar user = {myUser}/>
+            <FriendsBar user = {myUser}/>
+        </div>
+    )
+}
+
+function saveUserData(user) {
+    let path = "users/" + user.getId();
+    let docRef = firestore.doc(path);
+    docRef.set({
+        id: user.getId(),
+        friendsList: user.getFriendsList(),
+        responses: user.getResponses(),
+        scores: user.getMetrics(),
+    }).then( function() {
+        console.log("success, glorious!");
+    }).catch( function(error) {
+        console.log("error");
+    });
+}
+
+function makeUser(user, token) {
+    let path = "users/" + user.uid;
+    let docRef = firestore.doc(path);
+    let name, id, friendsList, metrics, responses;
+
+    name = user.displayName;
+    id = user.uid;
+    docRef.get().then(function (doc) {
+        if (doc && doc.exists) {
+            const userData = doc.data();
+            friendsList = userData.friendsList;
+            metrics = userData.scores;
+            responses = userData.responses;
+        } else {
+            friendsList = [];
+            metrics = [50];
+            responses = [];
+        }
+    }).catch( function(error) {
+        console.log("error");
+    });
+    let newUser = new User(name, id, friendsList, metrics, responses);
+    return newUser;
 }
 
 class meterBar {
