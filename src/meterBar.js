@@ -169,10 +169,10 @@ class Survey {
 
 }
 
-const idSave = "randomJSDude";
-const friendsSave = ["", "please", "help", ":("];
-const metricsSave = [1,2,3,4,5,6,7,8,9,0];
-const responsesSave = ["please help"];
-
-let user = new User(idSave, friendsSave, metricsSave, responsesSave);
-saveUserData(user);
+// const idSave = "randomJSDude";
+// const friendsSave = ["", "please", "help", ":("];
+// const metricsSave = [1,2,3,4,5,6,7,8,9,0];
+// const responsesSave = ["please help"];
+//
+// let user = new User(idSave, friendsSave, metricsSave, responsesSave);
+// saveUserData(user);
