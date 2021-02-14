@@ -101,75 +101,75 @@ class User {
     }
 }
 
-// class meterBar {
-//
-//     point;
-//     CHANGE_AMOUNT = 5;
-//
-//     constructor() {
-//         this.point = 50;
-//     }
-//
-//     public incVal() {
-//         this.point += 5;
-//     }
-//
-//     public decVal() {
-//         this.point -= 5;
-//     }
-//
-//     public getCurrentVal()  {
-//         return this.point;
-//     }
-//
-//     // return "RED" or "YELLOW" or "GREEN"
-//     public getColor() {
-//         if (this.point < 30) {
-//             return "RED";
-//         } else if (this.point < 60) {
-//             return "YELLOW";
-//         } else {
-//             return "GREEN";
-//         }
-//     }
-// }
-//
-//
-// class Survey {
-//
-//     greenQns = ["How is your day going?", "Any issues you want to talk about?", "If you could live anywhere, where would it be?", "What weird food combinations do you really enjoy?"];
-//     yellowQns = ["How are you feeling today?", "Anything you want to talk about?", "Any issues you want to talk about?"];
-//     redQns = ["Are you alive?"];
-//
-//     responses; // recorded responses here, pass this to machine learning algorithm in the future
-//     currentMeterBar;
-//
-//     constructor(bar, moreGreenQns, moreYellowQns, moreRedQns) {
-//         this.currentMeterBar = bar;
-//         this.greenQns = this.greenQns.concat(moreGreenQns);
-//         this.yellowQns = this.greenQns.concat(moreYellowQns);
-//         this.redQns = this.greenQns.concat(moreRedQns);
-//     }
-//
-//     public getSurveyQuestions() {
-//         let color = this.currentMeterBar.getColor();
-//
-//         if (color === "GREEN") {
-//             return this.greenQns;
-//         } else if (color === "YELLOW") {
-//             return this.yellowQns;
-//         } else {
-//             return this.redQns;
-//         }
-//     }
-//
-//     public recordResponses(responses: string[]) {
-//         this.responses = responses;
-//     }
-//
-// }
+class meterBar {
 
-const idSave = "someUserName";
+    point;
+    CHANGE_AMOUNT = 5;
+
+    constructor() {
+        this.point = 50;
+    }
+
+    incVal() {
+        this.point += 5;
+    }
+
+    decVal() {
+        this.point -= 5;
+    }
+
+    getCurrentVal()  {
+        return this.point;
+    }
+
+    // return "RED" or "YELLOW" or "GREEN"
+    getColor() {
+        if (this.point < 30) {
+            return "RED";
+        } else if (this.point < 60) {
+            return "YELLOW";
+        } else {
+            return "GREEN";
+        }
+    }
+}
+
+
+class Survey {
+
+    greenQns = ["How is your day going?", "Any issues you want to talk about?", "If you could live anywhere, where would it be?", "What weird food combinations do you really enjoy?"];
+    yellowQns = ["How are you feeling today?", "Anything you want to talk about?", "Any issues you want to talk about?"];
+    redQns = ["Are you alive?"];
+
+    responses; // recorded responses here, pass this to machine learning algorithm in the future
+    currentMeterBar;
+
+    constructor(bar, moreGreenQns, moreYellowQns, moreRedQns) {
+        this.currentMeterBar = bar;
+        this.greenQns = this.greenQns.concat(moreGreenQns);
+        this.yellowQns = this.greenQns.concat(moreYellowQns);
+        this.redQns = this.greenQns.concat(moreRedQns);
+    }
+
+    getSurveyQuestions() {
+        let color = this.currentMeterBar.getColor();
+
+        if (color === "GREEN") {
+            return this.greenQns;
+        } else if (color === "YELLOW") {
+            return this.yellowQns;
+        } else {
+            return this.redQns;
+        }
+    }
+
+    recordResponses(responses) {
+        this.responses = responses;
+    }
+
+}
+
+const idSave = "randomJSDude";
 const friendsSave = ["", "please", "help", ":("];
 const metricsSave = [1,2,3,4,5,6,7,8,9,0];
 const responsesSave = ["please help"];
