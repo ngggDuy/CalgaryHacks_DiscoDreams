@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
+import { saveUserData } from "../App"
 class IsolationBar extends Component {
 
     constructor(props) {
@@ -40,8 +41,9 @@ class IsolationBar extends Component {
         }
     }
 
-    onSaveClick= () => {
+    onSaveClick= (props) => {
         window.alert("Saved!");
+        saveUserData(props.user);
     }
 
     render() {

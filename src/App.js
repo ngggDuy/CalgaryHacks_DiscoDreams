@@ -138,7 +138,7 @@ function Interface() {
     )
 }
 
-function saveUserData(user) {
+export function saveUserData(user) {
     let path = "users/" + user.getId();
     let docRef = firestore.doc(path);
     docRef.set({
