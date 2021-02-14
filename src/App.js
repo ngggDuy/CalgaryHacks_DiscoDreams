@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import IsolationBar from "../../CalgaryHacks_DiscoDreams/src/components/IsolationBar";
 import FriendsBar from "../../CalgaryHacks_DiscoDreams/src/components/FriendsBar";
+import {makeUser} from "../../CalgaryHacks_DiscoDreams/functions/index";
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -21,6 +22,7 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
+let user = null;
 
 function App() {
     const [user] = useAuthState(auth);
@@ -41,7 +43,27 @@ function App() {
 function SignIn() {
     const signInWithGoogle = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider);
+        auth.signInWithPopup(provider).then((result) => {
+            /** @type {firebase.auth.OAuthCredential} */
+            let credential = result.credential;
+
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            let token = credential.accessToken;
+            // The signed-in user info.
+            let user = result.user;
+            //
+            this.user = makeUser(user,token);
+
+        }).catch((error) => {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        });
     }
 
     return (
