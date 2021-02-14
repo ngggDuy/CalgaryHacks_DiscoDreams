@@ -19,9 +19,86 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+var firestore = firebase.firestore();
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// for testing purposes. Comment out after finishing tests.
+const idText = document.getElementById("idText");
+const friendsText = document.getElementById("friendsText");
+const metricsText = document.getElementById("metricsText");
+const responsesText = document.getElementById("responsesText");
+const saveButton = document.getElementById("saveButton");
+
+saveButton.addEventListener("click", function() {
+    const idSave = "someUserName";
+    const friendsSave = ["", "please", "help", ":("];
+    const metricsSave = [1,2,3,4,5,6,7,8,9,0];
+    const responsesSave = ["please help"];
+
+    let user: any = new User(idSave, friendsSave, metricsSave, responsesSave);
+    saveUserData(user);
+});
+
+
+
+export function saveUserData(user: any) {
+    let path: string = "users/" + user.getId();
+    let docRef = firestore.doc(path);
+    docRef.set({
+        id: user.getId(),
+        friendsList: user.getFriendsList(),
+        responses: user.getResponses(),
+        scores: user.getMetrics(),
+    }).then( function() {
+        console.log("success, glorious!");
+    }).catch( function(error) {
+        console.log("error");
+    });
+}
+
+export function getUserData(user: any) {
+
+}
+
+
+
+
+// TODO: find out how we can swap this for google authentication
+export function authenticateUser(username: string, password: string) {
+    // assume this shit works.
+
+}
+
+class User {
+
+    // private name: string;
+    private id: string; // this should be the auth's uid
+    private friendsList: string[];
+
+    private metrics: number[];
+    private responses: string[];
+
+    constructor(id: string, friendsList: string[], metrics: number[], responses: string[]) {
+        this.id = id;
+        this.metrics = metrics;
+        this.responses = responses;
+    }
+
+    public getId():string  {
+        return this.id;
+    }
+
+    public getFriendsList():string[] {
+        return this.friendsList;
+    }
+
+    public getMetrics(): number[] {
+        return this.metrics;
+    }
+
+    public getResponses(): string[] {
+        return this.responses;
+    }
+}
 
 export class meterBar {
 
