@@ -5,9 +5,13 @@ import FriendsBar from "../../CalgaryHacks_DiscoDreams/src/components/FriendsBar
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import MoodMeterContainer from './components/MoodMeterContainer';
+import ProfileBar from './components/ProfileBar';
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyBR7BEXnWTScVSoJ5jzoFPfZuqb0tiZkx8",
@@ -57,10 +61,15 @@ function SignOut() {
 
 function Interface() {
     return (
-        <div className="container">
-            <IsolationBar/>
-            <FriendsBar/>
-        </div>
+        <>
+            <div className="container">
+                <ProfileBar/>
+                <IsolationBar/> 
+                <FriendsBar/>
+                <MoodMeterContainer/>
+            </div>
+        </>
+        
     )
 }
 
